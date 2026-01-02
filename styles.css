@@ -1,0 +1,85 @@
+.container{
+  text-align: center;
+}
+
+/* ゲーム全体のカード */
+.game-card {
+  background: #e8f5ff;
+  padding: 20px;
+  border-radius: 15px;
+  margin-top: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  max-width: 520px;
+  width: 100%;
+  margin: 20px auto;
+}
+
+/* 手数表示 */
+.move-count {
+  text-align: left;
+  font-size: 18px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+/* 棒のエリア */
+.towers-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-top: 30px;
+  gap: 40px;
+}
+
+/* 棒 */
+.tower {
+  width: 120px;
+  height: 200px;
+  background: #b0bec5;
+  border-radius: 10px;
+  padding-top: 10px;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+.tower-selected {
+  background: #90caf9;
+}
+
+/* 円盤 */
+.disk {
+  height: 20px;
+  background-color: #4fc3f7;
+  border-radius: 10px;
+  margin: 3px 0;
+  text-align: center;
+  color: white;
+  font-size: 12px;
+  line-height: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.difficulty-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.difficulty {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  background: #cfd8dc;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.difficulty.active {
+  background: #42a5f5;
+  color: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
