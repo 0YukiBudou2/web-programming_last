@@ -15,16 +15,21 @@ export default function HanoiGame({ initialDisks = 3 }) {
   const [moveCount, setMoveCount] = useState(0);
   const [isClear, setIsClear] = useState(false);
   const minMoves = Math.pow(2, initialDisks) - 1;
-  
+  const [history, setHistory] = useState([]);
+
   useEffect(() => {
-    setTowers(createInitialTowers());
+    const initial = createInitialTowers();
+    setTowers(initial);
+    setHistory([initial.map(t => [...t])]);
     setSelectedTower(null);
     setMoveCount(0);
     setIsClear(false);
   }, [initialDisks]);
 
   const handleReset = () => {
-    setTowers(createInitialTowers(initialDisks));
+    const initial = createInitialTowers(initialDisks);
+    setTowers(initial);
+    setHistory([initial.map(t => [...t])]);
     setSelectedTower(null);
     setMoveCount(0);
     setIsClear(false);
@@ -57,6 +62,7 @@ export default function HanoiGame({ initialDisks = 3 }) {
         const newTowers = towers.map((t) => [...t]);
         newTowers[index].push(newTowers[selectedTower].pop());
 
+        setHistory([...history, newTowers.map(t => [...t])]);
         setTowers(newTowers);
         setMoveCount(moveCount + 1);
         if (newTowers[2].length === initialDisks) {
@@ -67,12 +73,33 @@ export default function HanoiGame({ initialDisks = 3 }) {
       setSelectedTower(null);
     }
   };
+  const handleUndo = () => {
+    if (history.length <= 1) return;
+
+    const newHistory = [...history];
+    newHistory.pop(); // 最新状態を削除
+
+    const previous = newHistory[newHistory.length - 1];
+
+    setHistory(newHistory);
+    setTowers(previous.map(t => [...t]));
+    setMoveCount(moveCount - 1);
+    setSelectedTower(null);
+    setIsClear(false);
+  };
 
   return (
     <div className="game-card">
       <p className="move-count">手数: {moveCount}</p>
       <button className="reset-button" onClick={handleReset}>
         リセット
+      </button>
+      <button
+        className="undo-button"
+        onClick={handleUndo}
+        disabled={history.length <= 1}
+      >
+        1手戻る
       </button>
       {isClear && minMoves == moveCount && (
           <p className="clear-message">

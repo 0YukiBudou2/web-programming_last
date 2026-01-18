@@ -83,3 +83,16 @@
   box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
 
+.undo-button {
+  margin-left: 10px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  background: #90caf9;
+  cursor: pointer;
+}
+
+.undo-button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
